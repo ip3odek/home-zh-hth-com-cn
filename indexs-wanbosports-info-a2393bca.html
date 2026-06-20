@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>万博体育 · 轻量导航页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f6fa;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #1e2a3a;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b1a2e 0%, #142b44 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            color: #e6edf5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #f0b429;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #bcccdb;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero .tagline {
+            margin-top: 1.5rem;
+            display: inline-block;
+            background: rgba(240, 180, 41, 0.18);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #f0c96a;
+            border: 1px solid rgba(240, 180, 41, 0.3);
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .intro-card p {
+            font-size: 1.05rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .accent-link {
+            color: #1a5c9e;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid #f0b429;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .accent-link:hover {
+            color: #0d3b66;
+            border-bottom-color: #d49c1a;
+        }
+
+        /* 三个场景模块 — 卡片网格 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.8rem;
+        }
+
+        .scene-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 4px solid #e8edf2;
+        }
+
+        .scene-item:nth-child(1) {
+            border-top-color: #f0b429;
+        }
+        .scene-item:nth-child(2) {
+            border-top-color: #1a5c9e;
+        }
+        .scene-item:nth-child(3) {
+            border-top-color: #2f8b7a;
+        }
+
+        .scene-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .scene-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.65rem;
+            color: #0f2a3f;
+        }
+
+        .scene-item p {
+            font-size: 0.98rem;
+            color: #3d5166;
+        }
+
+        .scene-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* 常见说明 (FAQ摘要) */
+        .faq-section {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            padding: 2rem 2rem 1.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #142b44;
+            border-left: 6px solid #f0b429;
+            padding-left: 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid #eef1f6;
+            padding-bottom: 1rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #1a2d42;
+            margin-bottom: 0.2rem;
+            font-size: 1.05rem;
+        }
+
+        .faq-answer {
+            color: #4a5f74;
+            font-size: 0.95rem;
+        }
+
+        .faq-answer a {
+            color: #1a5c9e;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: #f0b429;
+            text-decoration-thickness: 2px;
+        }
+
+        .faq-answer a:hover {
+            color: #0b3b5e;
+        }
+
+        /* 提示 / 说明带 */
+        .note-strip {
+            margin: 2rem 0 1rem;
+            padding: 1rem 1.5rem;
+            background: #e7eef7;
+            border-radius: 60px;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #1f3d5a;
+        }
+
+        .note-strip span {
+            font-weight: 500;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 820px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            .scenes-grid {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 3rem;
+            }
+            .intro-card,
+            .faq-section {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3.2rem 1rem 2.8rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .faq-section h2 {
+                font-size: 1.3rem;
+            }
+            .scene-item {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 / hero -->
+    <header class="hero">
+        <h1>万博体育 · 知识引航</h1>
+        <p class="subtitle">从赛事理解到运动文化，轻量导航呈现体育世界的多维切面</p>
+        <div class="tagline">⚡ 内容导向 · 克制表达</div>
+    </header>
+
+    <!-- 浅色正文区 -->
+    <main class="container">
+
+        <!-- 核心介绍 -->
+        <section class="intro-card">
+            <p>
+                <a href="https://indexs-wanbosports.com" class="accent-link">万博体育</a> 作为体育信息与动态的聚合端口，其价值不止于比分与赛程。  
+                当我们讨论体育时，我们在讨论战术演变、体能科学、规则迭代与社群归属。  
+                本页以轻量导航的方式，梳理三个常见认知场景，帮助新读者快速建立对体育世界的框架感。
+            </p>
+            <p>
+                体育的本质是规则框架下的身体表达，而每一个运动项目背后都有一套完整的知识体系。  
+                从田径到球类，从个人竞技到团队配合，理解这些脉络，才能更深入地欣赏比赛。
+            </p>
+        </section>
+
+        <!-- 三个场景模块 -->
+        <h2 style="font-size:1.5rem; font-weight:600; color:#142b44; margin-bottom:0.2rem;">常见认知场景</h2>
+        <p style="color:#3d5a73; margin-bottom:1.2rem; font-size:0.95rem;">将体育知识拆解为三个可讨论的模块</p>
+
+        <div class="scenes-grid">
+            <div class="scene-item">
+                <span class="scene-icon">📊</span>
+                <h3>数据与趋势</h3>
+                <p>现代体育离不开数据支撑：球员效率值、球队控球率、赛季变化曲线。  
+                看懂数字背后的逻辑，比只看胜负更有意思。许多分析方式正逐渐从专业圈渗透到日常讨论中。</p>
+            </div>
+            <div class="scene-item">
+                <span class="scene-icon">⚙️</span>
+                <h3>规则与战术</h3>
+                <p>每一项运动都有其独特的规则演变史。越位规则如何改变足球战术？  
+                网球计分为何如此特别？理解规则深度，等于解锁了另一层观赛乐趣。</p>
+            </div>
+            <div class="scene-item">
+                <span class="scene-icon">🌍</span>
+                <h3>文化与社群</h3>
+                <p>体育从来不是孤立的。球迷文化、地域德比、运动服饰潮流……  
+                体育作为一种全球通用语言，连接着不同背景的人群，也塑造着当代生活方式。</p>
+            </div>
+        </div>
+
+        <!-- 常见说明 (FAQ摘要) -->
+        <section class="faq-section">
+            <h2>常见说明 · 摘要</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">如何开始了解一项陌生运动？</div>
+                <div class="faq-answer">
+                    建议从规则入门开始，再关注代表性赛事与选手。  
+                    许多综合性平台如 <a href="https://indexs-wanbosports.com">万博体育</a> 提供基础百科与实时数据，适合作为起点。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">体育数据中的常见误区有哪些？</div>
+                <div class="faq-answer">
+                    样本量不足时容易过度解读，例如仅凭几场比赛判断球员水平。  
+                    另外，不同联赛的统计口径可能不同，横向对比需谨慎。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">战术分析和观赛体验如何平衡？</div>
+                <div class="faq-answer">
+                    部分观众喜欢沉浸式感受，另一些则偏好拆解细节。两者并不冲突，  
+                    可以先完整看一场比赛，再回看关键片段做战术复盘。
+                </div>
+            </div>
+
+            <div style="margin-top:1.2rem; font-size:0.9rem; color:#52738c; border-left:3px solid #f0b429; padding-left:1rem;">
+                💡 提示：体育知识的学习是一个逐步积累的过程，保持好奇与开放比追求速成更重要。
+            </div>
+        </section>
+
+        <!-- 轻量提示行 -->
+        <div class="note-strip">
+            <span>🔄 内容方向</span> · 本页每期变化结构、段落与视觉细节，避免模板化重复。
+        </div>
+
+    </main>
+
+    <!-- 极简 footer (未使用深色强调，仅保持整洁) -->
+    <footer style="text-align:center; padding:1.8rem 1rem; color:#7a8b9e; font-size:0.85rem; border-top:1px solid #e0e6ed; margin-top:0.8rem;">
+        <p style="max-width:600px; margin:0 auto;">
+            知识型内容导航 · 基于体育主题展开 · 页面版本持续调整
+        </p>
+    </footer>
+
+</body>
+</html>
