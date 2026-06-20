@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伟德体育 · 持续在场</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f6f4f0;
+            color: #1e1d1a;
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #11141e 0%, #232833 50%, #171c28 100%);
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 195, 60, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: #c8b88a;
+            background: rgba(255, 215, 140, 0.08);
+            border-left: 3px solid #c8b88a;
+            padding: 0.4rem 1rem 0.4rem 1.2rem;
+            margin-bottom: 1.8rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: #f0ede4;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            max-width: 12ch;
+        }
+
+        .hero p {
+            color: #b4b0a2;
+            font-size: 1.1rem;
+            max-width: 52ch;
+            margin-top: 1.2rem;
+            border-left: 1px solid #3a3f4b;
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 5rem 2rem;
+        }
+
+        .section-sub {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: #9a8e78;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 550;
+            color: #1e1d1a;
+            margin-bottom: 1.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .text-block {
+            margin-bottom: 3rem;
+        }
+
+        .text-block p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #2b2925;
+        }
+
+        .text-block a {
+            color: #ad7d4b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .text-block a:hover {
+            color: #835e36;
+            border-bottom-color: #c8a87c;
+        }
+
+        .text-block .highlight-link {
+            background: linear-gradient(to right, #f2ede4, #fffcf5);
+            padding: 0.1rem 0.25rem;
+            border-radius: 2px;
+        }
+
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.8rem 0 3.2rem 0;
+        }
+
+        .card {
+            flex: 1 1 220px;
+            background: #ffffffec;
+            padding: 1.8rem 1.5rem 1.8rem 1.8rem;
+            border-left: 4px solid #dac4a8;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e1d1a;
+            margin-bottom: 0.6rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #3d3a33;
+        }
+
+        .quote-line {
+            margin: 2.5rem 0 2rem 0;
+            padding: 1.8rem 2rem;
+            background: #ebe7df;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .quote-line p {
+            font-size: 1.1rem;
+            font-style: normal;
+            color: #1f1c17;
+        }
+
+        .quote-line .source {
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #7e735f;
+            letter-spacing: 0.02em;
+        }
+
+        .faq-mini {
+            background: #f0ede7;
+            padding: 1.8rem 2rem;
+            margin: 2.8rem 0 1.8rem 0;
+            border-radius: 4px;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #d7d0c2;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #2b2822;
+            padding: 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        .faq-mini details[open] summary {
+            color: #ad7d4b;
+        }
+
+        .faq-mini details p {
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+            color: #3d3a33;
+            padding-left: 0.2rem;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dfd9ce;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .footer-note p {
+            font-size: 0.95rem;
+            color: #5b5547;
+        }
+
+        .footer-note a {
+            color: #7f684b;
+            text-decoration: none;
+            border-bottom: 1px dotted #b8a78c;
+            font-weight: 500;
+        }
+
+        .footer-note a:hover {
+            color: #4d3c28;
+            border-bottom-style: solid;
+        }
+
+        .meta-tip {
+            font-size: 0.8rem;
+            color: #8b806c;
+            letter-spacing: 0.03em;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                min-height: 50vh;
+                padding: 2rem 1.2rem 3rem 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                padding-left: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1.2rem 3.5rem 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .card-grid {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .card {
+                flex: 1 1 auto;
+                padding: 1.2rem 1rem;
+            }
+
+            .faq-mini {
+                padding: 1rem 1.2rem;
+            }
+
+            .footer-note {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">持续在场 · 运动叙事</div>
+        <h1>从一次访问到长期关注</h1>
+        <p>对于经常光顾的用户而言，<strong>伟德体育</strong> 早已不是一个陌生名词。它是许多人数字收藏栏里固定的一个条目，也是重新打开浏览器时习惯性输入的地址。</p>
+    </div>
+</section>
+
+<div class="container">
+
+    <!-- 第一段：再次访问与习惯 -->
+    <div class="text-block">
+        <div class="section-sub">—— 回访的节奏</div>
+        <div class="section-title">为什么你再次打开它</div>
+        <p>当我们谈论一个体育资讯平台的价值时，最常被忽略的恰恰是「回访」本身。就像一本反复翻阅的杂志，你未必每次都要从头读起，但你知道它在那里，内容在更新，板块在演进。<a href="https://main-weidesports.com" class="highlight-link">伟德体育</a> 正是这类内嵌在日常浏览习惯中的存在——它不靠弹窗或推送提醒你来访，而是靠持续的栏目节奏和稳定的信息结构，让你自然而然地将其加入书签。</p>
+        <p>收藏一个页面，本质上是对信息源投出信任票。从赛事简报到深度分析，再到社区讨论，平台在数年里积累的覆盖范围让老用户每次回来都能快速定位自己关心的领域，而无需重新适应界面逻辑。</p>
+    </div>
+
+    <!-- 第二段：收藏背后的信息纵深 -->
+    <div class="text-block">
+        <div class="section-sub">—— 收藏夹的深度</div>
+        <div class="section-title">不止是首页，更是信息锚点</div>
+        <p>将某个网站加入收藏夹，在今天已经变成一种慎重的行为——我们收藏的不仅是链接，更是对信息质量的一种预期。<a href="https://main-weidesports.com">伟德体育</a> 的页面组织方式偏向杂志式排版，头图与正文之间有明确的呼吸感，这种设计本身就在引导深度阅读而非碎片滑动。老用户往往不是被某个爆炸标题吸引回来，而是因为知道这里的分析栏目保持着相对稳定的专业调性。</p>
+        <p>从长期关注的视角看，一个平台最珍贵的资产是它如何对待「回顾」。赛事回顾、赛季总结、数据沉淀——这些内容模块构成了可反复查阅的知识基底，而不仅仅是当日新闻的堆叠。对于体育爱好者而言，这种时间纵深让收藏变得更有意义。</p>
+    </div>
+
+    <!-- 卡片/特点区域 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>栏目节奏</h3>
+            <p>赛事前瞻、复盘、专栏文章按固定周期更新，建立可预期的阅读节奏。</p>
+        </div>
+        <div class="card">
+            <h3>信息密度</h3>
+            <p>头图+摘要+正文的层次结构，降低信息过载，提升长文完成率。</p>
+        </div>
+        <div class="card">
+            <h3>交互克制</h3>
+            <p>不滥用弹窗与自动播放，尊重用户自主浏览的意愿。</p>
+        </div>
+    </div>
+
+    <!-- 第三段：长期关注的内在逻辑 -->
+    <div class="text-block">
+        <div class="section-sub">—— 持续关注的动力</div>
+        <div class="section-title">从书签到习惯的距离</div>
+        <p>一个用户从「偶然访问」到「持续关注」，中间往往隔着两样东西：内容的新鲜感和心理上的低负担。<a href="https://main-weidesports.com">伟德体育</a> 在界面语言上采用偏中性、低饱和的视觉体系，使得长时间阅读不产生疲劳；同时，其专题式首页设计让用户每次到来都能快速捕捉到当天的主线议题，而不必在海量条目中自行筛选。</p>
+        <p>此外，平台在跨赛事覆盖与深度分析之间保持着一种可贵的平衡——它既不会为了流量而过度迎合热点，也不会因追求深度而忽略时效。这种平衡，恰恰是许多长期用户将其设为「每日浏览起点」的重要原因。</p>
+    </div>
+
+    <!-- 引用 / 概括性陈述 -->
+    <div class="quote-line">
+        <p>「真正有价值的平台，不是让你一次看个够，而是让你愿意一次次回来。」</p>
+        <div class="source">—— 来自一位长期关注者的自述</div>
+    </div>
+
+    <!-- FAQ 摘要（自然融入） -->
+    <div class="faq-mini">
+        <details>
+            <summary>如何快速找到过往专题？</summary>
+            <p>平台采用固定栏目分区，大多数专题报道归档在「深度」与「赛事」板块下，可通过顶部导航索引。老用户也可通过浏览器书签直接定位到常用分类页面。</p>
+        </details>
+        <details>
+            <summary>页面改动频繁吗？会不会影响使用习惯？</summary>
+            <p>首页结构以杂志式头图+三段内容为主体，改版频率极低，核心交互路径（导航、文章页、搜索）长期保持稳定，适合养成固定浏览习惯。</p>
+        </details>
+        <details>
+            <summary>移动端与桌面端的体验差异大吗？</summary>
+            <p>采用响应式布局，移动端同样保留头图、卡片与正文层次，阅读节奏一致，收藏夹内的链接在双端均可正常访问。</p>
+        </details>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+        <div>
+            <p>如果你还未将 <a href="https://main-weidesports.com">伟德体育</a> 加入收藏夹，现在或许是建立新习惯的起点。</p>
+            <p class="meta-tip">常回访 · 常更新 · 信息纵深来自每一天的积累</p>
+        </div>
+        <div>
+            <p style="font-size:0.9rem; color:#7a6f5b;">杂志式阅读 · 持续在场</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
