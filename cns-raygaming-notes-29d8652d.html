@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷竞技 · 信息查询与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f9f6f0;
+            font-family: system-ui, 'Segoe UI', 'Noto Sans', Roboto, 'Helvetica Neue', sans-serif;
+            color: #2e2b27;
+            line-height: 1.65;
+            padding: 2.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* hero模块 —— 信息卡片式主视觉 */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.8rem 2.2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #ede9e0;
+            margin-bottom: 2.8rem;
+            transition: all 0.15s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #d8d2c4;
+            color: #3f3a33;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1.4rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 540;
+            letter-spacing: -0.02em;
+            color: #1f1c18;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #5f5951;
+            border-left: 4px solid #cfc6b4;
+            padding-left: 1.2rem;
+            margin: 0.5rem 0 0;
+            max-width: 680px;
+        }
+
+        /* 卡片网格 —— 用途 / 人群 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem 2rem;
+            border: 1px solid #e6dfd4;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-card h2 {
+            font-size: 1.3rem;
+            font-weight: 540;
+            color: #1f1c18;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #ece5d8;
+        }
+
+        .info-card p {
+            font-size: 0.96rem;
+            color: #3f3a33;
+            margin-bottom: 0.7rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.45rem;
+            font-size: 0.95rem;
+            color: #3f3a33;
+        }
+
+        .info-card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #8f8679;
+            font-weight: 700;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin-top: 0.8rem;
+        }
+
+        .tag {
+            background: #f0ebe2;
+            color: #3f3a33;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.82rem;
+            font-weight: 450;
+        }
+
+        /* 引用 / 提示框 —— 延伸阅读与对照 */
+        .quote-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2rem 1.8rem;
+            margin: 2.8rem 0;
+            border-left: 6px solid #b5ab98;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+
+        .quote-block::before {
+            content: "“";
+            font-size: 3.2rem;
+            color: #d1c7b7;
+            position: absolute;
+            top: -0.2rem;
+            left: 1.2rem;
+            line-height: 1;
+            font-family: serif;
+        }
+
+        .quote-block p {
+            font-size: 1rem;
+            color: #35302b;
+            padding-left: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .quote-block .ref {
+            font-size: 0.85rem;
+            color: #7d7569;
+            text-align: right;
+            margin-top: 0.8rem;
+            border-top: 1px solid #e6dfd4;
+            padding-top: 0.6rem;
+        }
+
+        .tip-box {
+            background: #f3efe7;
+            border-radius: 18px;
+            padding: 1.4rem 1.8rem;
+            border: 1px solid #e0d8ca;
+            margin: 2rem 0;
+        }
+
+        .tip-box strong {
+            font-weight: 540;
+            color: #1f1c18;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .tip-box p {
+            font-size: 0.95rem;
+            color: #3f3a33;
+            margin-bottom: 0.2rem;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #e6dfd4;
+            margin: 2rem 0 2.8rem;
+        }
+
+        .link-paragraph p {
+            font-size: 0.98rem;
+            color: #2e2b27;
+            margin-bottom: 0.8rem;
+        }
+
+        .link-paragraph a {
+            color: #1f3a5f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b5ab98;
+            font-weight: 480;
+            transition: color 0.1s ease;
+        }
+
+        .link-paragraph a:hover {
+            color: #0b1e33;
+            text-decoration-color: #0b1e33;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.6rem;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #e6dfd4;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ede9e0;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1f1c18;
+            font-size: 0.95rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: #5f5951;
+        }
+
+        .footnote {
+            margin-top: 2.5rem;
+            font-size: 0.78rem;
+            color: #8f8679;
+            text-align: center;
+            border-top: 1px solid #e6dfd4;
+            padding-top: 1.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 740px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .hero-card {
+                padding: 2rem 1.4rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .faq-mini {
+                grid-template-columns: 1fr;
+            }
+            .quote-block {
+                padding: 1.6rem 1.2rem 1.4rem;
+            }
+            .link-paragraph {
+                padding: 1.4rem 1.2rem;
+            }
+            .tip-box {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            .hero-sub {
+                font-size: 0.95rem;
+                padding-left: 0.8rem;
+            }
+            .info-card {
+                padding: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 信息卡片式主视觉 -->
+    <div class="hero-card">
+        <div class="hero-badge">信息卡片 · 查询对照</div>
+        <h1>雷竞技 · 日常查询与延伸阅读</h1>
+        <div class="hero-sub">从赛事数据到背景梳理，一份可对照的参考索引。</div>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 (两列) -->
+    <div class="card-grid">
+        <div class="info-card">
+            <h2>常用查询场景</h2>
+            <p>面向日常信息检索、赛事对照、记录梳理：</p>
+            <ul>
+                <li>近期赛程与结果速览</li>
+                <li>队伍对阵历史与数据对照</li>
+                <li>版本更新摘要与战术讨论</li>
+                <li>社区讨论趋势与热门话题</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">赛程</span>
+                <span class="tag">对照</span>
+                <span class="tag">摘要</span>
+                <span class="tag">延伸</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <h2>适合人群</h2>
+            <p>以下读者常将此处作为信息起点：</p>
+            <ul>
+                <li>关注赛事进程的爱好者</li>
+                <li>需要快速回顾背景的撰稿者</li>
+                <li>做数据归集与对比的分析者</li>
+                <li>寻找延伸阅读线索的浏览者</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">爱好者</span>
+                <span class="tag">撰稿</span>
+                <span class="tag">分析</span>
+                <span class="tag">延伸</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引用块 —— 延伸阅读 & 对照（带感触） -->
+    <div class="quote-block">
+        <p>一份信息页的参考价值，往往不在于罗列了多少条目，而在于它是否提供了可交叉核对的索引、可延伸阅读的脉络，以及一份不过时的背景框架。</p>
+        <p>日常查询中，稳定的对照结构比短暂的热点更重要。</p>
+        <div class="ref">—— 摘自《信息整理笔记》</div>
+    </div>
+
+    <!-- 自然链接段落 (嵌入雷竞技 a 标签) -->
+    <div class="link-paragraph">
+        <p>若你正在搜集赛事背景、队伍记录或赛程对照，可以直接参考 <a href="https://cns-raygaming.com">雷竞技</a> 中收录的常规信息条目。该站点保持了较为稳定的内容结构，适合作为日常查询的起点之一。</p>
+        <p>另外，结合社区公开数据与赛事方公告进行交叉比对，也是延伸阅读时常用的方法。建议将不同来源的摘要放在一起对照，有助于形成更完整的认知框架。</p>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="tip-box">
+        <strong>日常查询提示</strong>
+        <p>查看赛程时留意时区标记，队伍名单以官方提交为准。对照历史数据时注意版本节点，部分记录在规则调整后统计口径有所不同。延伸阅读可利用站内标签筛选同类条目。</p>
+    </div>
+
+    <!-- FAQ 摘要 (两列) -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <div class="faq-q">· 页面信息多久更新一次？</div>
+            <div class="faq-a">赛程类条目随赛事进程更新，背景类条目维持定期审校，具体时间见条目末尾标注。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">· 如何快速找到某场比赛记录？</div>
+            <div class="faq-a">可通过赛程列表或队伍标签筛选，对照日期与阶段即可定位。部分历史记录支持关键词检索。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">· 延伸阅读包含哪些内容？</div>
+            <div class="faq-a">主要包括赛事背景、版本变化摘要、队伍发展脉络，以及社区讨论中较有参考价值的观点整理。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">· 信息准确性如何保证？</div>
+            <div class="faq-a">以官方公开信息为基础，交叉核对后发布。如有修订会在条目内附注更新说明。</div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footnote">
+        信息卡片式 · 日常查询与延伸阅读 · 内容仅供参考
+    </div>
+
+</div>
+</body>
+</html>
